@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @layer normalize, fonts, mobile, main;
+      @import url("./assets/sites/normalize.css") layer(normalize);
+      @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap") layer(fonts);
+      @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0") layer(fonts);
+      @import url("./assets/sites/SN.css") layer(main);
+    </style>
+    <title>Ads Preview</title>
+  </head>
+  <body>
+    <div id="pageCont">
+      <div id="page">
+        <div class="displayAd BG"></div>
+        <div></div>
+        <main>
+          <div class="displayAd topscroll"></div>
+          <header>
+            <p class="btn" style="grid-area: aboBtn">Abo</p>
+            <div class="headerGroup links" style="grid-area: links1">
+              <p class="link">Karriere</p>
+              <p class="link">Immobilien</p>
+            </div>
+            <div class="headerGroup" style="grid-area: logo">
+              <svg class="logo shortLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
+                <path
+                  fill="var(--accentColor)"
+                  d="m1035 534-22-17-689 952 21 17 52-71 284 158 231-186V985l-149-75 272-376Zm-297 830-220-111 123-169 97 50v230Zm248-868-22-16-82 111-208-137-258 177v344l138 66-281 391 24 17 689-953ZM773 734l-91 135-95-49V640l186 94Zm872-143v825l85 42-101 129-161-80V710l-106-53v912h-32V550h32v57l138-140 145 124zm-477-124 127 86v1033l-126-43-49 12V663l-92-67 140-129z" />
+              </svg>
+              <svg class="logo longLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850.4 107.7">
+                <g fill="var(--accentColor)">
+                  <path
+                    d="M203.8 79.7V27.4L190 19.2l-9.7 9V5.1l-9 3.5-5-1.3V80l14.3 10 23.2-10.3Zm-13.9-2.3-9.6-4V33.9l9.6 4.7v38.8Zm568.7-55.7h11.6l-7.4 12.8h-4.2v38.8l7.1 5.2-9.5 11.7-11.7-7.2V34.4h-4.3l18.4-22.5v9.8zm-113.2.5 9.4-3.3.1 57.4 4.4 3.4-10.2 10.9-8.6-7.4V19.5l4.9 2.7zm8.2-17.5-7.4 11.7-3.6 1.9 3.6-13.6h7.4zM468.4 10v66.3l6.8 3.4-8.1 10.4-13-6.5v-64l-8.5-4.3v73.3H443V6.7h2.6v4.5L456.7 0l11.7 10zM430 0l10.2 6.9V90l-10.1-3.5-3.9 1V15.8l-7.5-5.5L430 0zm-57 42-13.3-23L341 33.7v46L362.2 90l9.3-12.9-1.8-1.3-2.5 3.6L355 73V56.4l18.1-14.3Zm-10 5.4-8 6.2v-19l8 12.7Zm-31.7 42.4V29.7l-19.7-10.4L293.8 34v48.4l11.5 7.3 12-9v13l-14.6-.8-8.4 11.6 1.8 1.3 2.3-3.2 20 5 12.9-17.9Zm-14-12.4-9.6-4V33.9l9.6 4.8v38.7ZM266 19.5l5.1 5.4 14.3-6 8.7 11-9.5 7.6-6.1-3.6v42.2l6.1 3.2-7.5 10.5-13.1-6.5.1-50.8-4.6-2 6.5-11zM123.4 5.1v71.2l4.2 3.1-8.1 10.8-10.2-7.2V7.3l5.1 1.3 9-3.5zM104 79.7l-5.4-3.4V29.7L78.8 19.3 60.8 34v47.4l11.4 8.7 12-10.8v3.9l12 6.8 7.8-10.3Zm-19.5-2.5-9.4-3.8V34l9.4 4.8v38.5ZM61.3 6.4l-1.8-1.3L4 81.6 5.8 83l4.1-5.7L32.8 90l18.6-15V42.7l-12-6L61.2 6.4Zm-24 66.8-17.6-9 9.8-13.6 7.8 4.1v18.5Zm20-69.8L55.5 2 49 11 32.2 0 11.5 14.3v27.6l11.1 5.3L0 78.7 1.9 80 57.3 3.4ZM40.2 22.5l-7.4 10.9-7.5-4V15l14.9 7.5Zm482.4 57.2-5.4-3.4V29.7l-19.6-10.4L479.5 34v47.4l11.3 8.7 12-10.8v3.9l12 6.8 7.9-10.3ZM503.1 77l-9.4-3.7V34l9.4 4.7V77Zm319.3-57.9v9.3l12.3-9.5L846.2 30l-.1 46.3 4.3 2.8-7.9 11.4-10.3-7.3.1-43.8-9.9-5.5v42.4l4.3 3.1-8.2 10.8-10.1-7V19.5l4.6 2.7 9.4-3.1zm-249.5-14v23.3l12.2-8.9 11.6 10.6-.1 46.2 4.2 2.8-7.8 11.4-10.3-7.3.1-44-9.9-5.3v42.4l4.3 3.1-8.2 10.8-10.2-7V7.3l5.1 1.4 9-3.6z" />
+                  <path
+                    d="m544.4 19.4 17.7 10-8.8 10.3-11-5.9v39.5l10.4 6.2 2.6-3.6 1.8 1.3-9.4 13-19.6-10.3V33.6l16.3-14.2zm-164.2.1 5.1 5.4 14.3-6 8.7 11-9.5 7.6-6.1-3.6v42.2l6 3.2-7.5 10.5-13.1-6.5.1-50.6-4.5-2.2 6.5-11zm-239.5-.3 17.4 8.4-9.3 11.4 8.1 7v45.3l-16.6 10.5-11.1-7.9 6.9-9.1L143 88V50.7l-9.2-6.4 8.9-9.3-12.6-6.7 10.6-9.1zm79 .5 9.1 6.3v47.2l9.7 4.2V34.8l-3.5-3.5 10.9-11.6 6.8 5.8v50.7l5.2 3.3-8.2 10.5-8.4-5.5-11.7 5.5-14.8-10.5V34.8a69 69 0 0 1-4.6-4.6l9.5-10.5Zm391.1-.2 5.1 5.4 14.3-6 8.7 11-9.5 7.6-6.1-3.6v42.2l6.1 3.2-7.6 10.5-13.1-6.5.2-50.8-4.6-2 6.5-11zM803.3 42l-13.4-23-18.7 14.6v46L792.4 90l9.3-12.9-1.8-1.3-2.5 3.6-12.2-6.4V56.4l18-14.3Zm-10 5.4-8 6.2v-19l8 12.7ZM709.4 5.1v23.3l12.2-8.9 11.6 10.6-.1 46.2 4.3 2.8-7.9 11.4-10.3-7.3.1-44-9.9-5.3v42.4l4.3 3.1-8.2 10.8-10.1-7V7.3l5.1 1.4 8.9-3.6z" />
+                  <path d="m680.9 19.4 17.8 10-8.9 10.3-11-5.9v39.5l10.4 6.2 2.7-3.6 1.7 1.3-9.4 13-19.5-10.3V33.6l16.2-14.2z" />
+                </g>
+              </svg>
+            </div>
+            <div class="headerGroup links" style="grid-area: links2">
+              <p class="link">E-Paper</p>
+              <p class="link">SN-Card</p>
+            </div>
+            <div class="headerGroup" style="grid-area: menu">
+              <span class="material-symbols-rounded"> account_circle </span>
+              <span class="material-symbols-rounded"> search </span>
+              <span class="material-symbols-rounded"> menu </span>
+            </div>
+          </header>
+          <div class="displayAd banner"></div>
+          <section class="sectionHighlight collectionAd">
+            <article>
+              <img src="https://picsum.photos/600/400?random=1" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 9"></h2>
+              <p class="lo 32"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=2" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 7"></h2>
+              <p class="lo 35"></p>
+            </article>
+            <article class="mediumRectangle">
+              <img src="https://picsum.photos/300/200?random=3" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 8"></h2>
+              <p class="lo 28"></p>
+            </article>
+          </section>
+          <div class="displayAd understitial"></div>
+          <section class="sectionStandard">
+            <article>
+              <img src="https://picsum.photos/300/200?random=4" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 8"></h2>
+              <p class="lo 17"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=5" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 5"></h2>
+              <p class="lo 30"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=6" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 12"></h2>
+              <p class="lo 40"></p>
+            </article>
+            <article class="sitelink">
+              <img src="https://picsum.photos/300/200?random=7" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 7"></h2>
+              <p class="lo 32"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=8" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 5"></h2>
+              <p class="lo 38"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=9" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 6"></h2>
+              <p class="lo 32"></p>
+            </article>
+          </section>
+          <section class="sectionHighlight">
+            <article>
+              <img src="https://picsum.photos/600/400?random=10" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 9"></h2>
+              <p class="lo 30"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=11" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 5"></h2>
+              <p class="lo 30"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=12" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 7"></h2>
+              <p class="lo 30"></p>
+            </article>
+          </section>
+          <div class="displayAd midscroll"></div>
+          <section class="sectionStandard">
+            <article>
+              <img src="https://picsum.photos/300/200?random=13" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 9"></h2>
+              <p class="lo 26"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=14" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 7"></h2>
+              <p class="lo 29"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=15" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 8"></h2>
+              <p class="lo 33"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=16" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 6"></h2>
+              <p class="lo 27"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=17" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 5"></h2>
+              <p class="lo 28"></p>
+            </article>
+            <article>
+              <img src="https://picsum.photos/300/200?random=18" />
+              <h3 class="lo 1"></h3>
+              <h2 class="lo 9"></h2>
+              <p class="lo 32"></p>
+            </article>
+          </section>
+        </main>
+        <div class="displayAd aside"></div>
+      </div>
+    </div>
+  </body>
+</html>

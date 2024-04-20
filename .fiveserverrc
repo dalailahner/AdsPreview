@@ -1,0 +1,7 @@
+{
+  "injectBody": false,
+  "injectCss": false,
+  "navigate": false,
+  "open": "index.html",
+  "useLocalIp": true
+}

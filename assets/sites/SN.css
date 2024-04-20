@@ -1,0 +1,498 @@
+/* VARIABLES */
+:root {
+  --accentColor: #0358a9;
+  --BGhighlightColor: #ccddee;
+  --greyColor: #b3b3b3;
+  --lato: "Lato", sans-serif;
+  --fontColor1: #191919;
+  --fontColor2: #484848;
+  --contentWidth: min(100cqw, 1020px);
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+  &:focus-visible {
+    outline: 2px solid oklch(95% 0 0);
+    outline-offset: 2px;
+  }
+}
+html {
+  overflow: hidden;
+}
+
+body {
+  width: 100%;
+  height: 100dvh;
+}
+
+/* MAIN */
+#pageCont {
+  container: pageCont / size;
+  width: 100%;
+  height: 100%;
+}
+#page {
+  width: 100cqw;
+  height: 100cqh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden auto;
+}
+.phoneCont #page {
+  overflow: hidden;
+}
+
+main {
+  width: var(--contentWidth);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: var(--lato);
+  font-weight: 400;
+}
+
+/* HEADER */
+header {
+  width: 100%;
+  height: 4rem;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: "aboBtn logo menu";
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  box-shadow: 0 2rem 1rem -1rem rgba(204, 221, 238, 0.15);
+  z-index: 100;
+}
+
+.btn {
+  width: min-content;
+  padding: 0.35rem 0.75rem;
+  color: #fff;
+  font-weight: 400;
+  line-height: 1;
+  background-color: var(--accentColor);
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+}
+.headerGroup {
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.links {
+  display: none;
+}
+.headerGroup:last-child {
+  justify-content: flex-end;
+}
+.headerGroup .link,
+.headerGroup .material-symbols-rounded {
+  color: var(--greyColor);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    color: var(--accentColor);
+  }
+}
+.headerGroup .link {
+  font-size: 1rem;
+}
+.headerGroup .material-symbols-rounded {
+  font-size: 1.5rem;
+}
+.logo {
+  max-width: 300px;
+  height: 100%;
+  cursor: pointer;
+}
+.shortLogo {
+  display: block;
+}
+.longLogo {
+  display: none;
+}
+
+/* SECTIONS */
+section {
+  width: var(--contentWidth);
+  padding: 2.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 2.5rem;
+}
+
+.sectionStandard {
+  background-color: #fff;
+}
+
+.sectionHighlight {
+  background-color: var(--BGhighlightColor);
+}
+
+/* ARTICLE */
+article {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+article * {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  color: var(--fontColor1);
+  overflow: hidden;
+  z-index: 10;
+}
+article img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  background-color: var(--greyColor);
+  z-index: 0;
+}
+article h3 {
+  padding: 0.25rem 0.35rem;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  -webkit-line-clamp: 1;
+  text-transform: uppercase;
+  background-color: var(--accentColor);
+  border-radius: 3px;
+}
+article h2 {
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1;
+  -webkit-line-clamp: 2;
+}
+article p {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.15;
+  -webkit-line-clamp: 4;
+}
+
+.sectionHighlight article h2 {
+  font-size: 1.25rem;
+}
+
+.sectionHighlight:first-of-type article:first-child h2 {
+  font-size: 1.625rem;
+}
+
+/* WERBEMITTEL */
+.displayAd {
+  align-self: center;
+  justify-self: center;
+}
+.banner,
+.BG,
+.aside {
+  display: none;
+}
+.understitial {
+  width: 100cqw;
+  height: 100cqh;
+  display: none;
+  position: relative;
+  overflow: hidden;
+  clip-path: inset(0);
+  z-index: -1;
+  &:has(iframe) {
+    display: block;
+  }
+}
+.understitial::before {
+  content: "ANZEIGE";
+  top: 0;
+}
+.understitial::after {
+  content: " ";
+  bottom: 0;
+}
+.understitial::before,
+.understitial::after {
+  display: block;
+  padding: 0.2rem;
+  width: 100%;
+  height: 1.5rem;
+  position: absolute;
+  z-index: 1;
+  color: var(--fontColor2);
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+  background-color: var(--greyColor);
+}
+.topscroll {
+  display: none;
+  width: 100cqw;
+  height: 80cqh;
+  overflow: hidden;
+  clip-path: inset(0);
+  z-index: -1;
+}
+.midscroll {
+  display: none;
+  width: 100cqw;
+  height: 100cqh;
+  margin-top: 1.5rem;
+  overflow: hidden;
+  clip-path: inset(0);
+  z-index: -1;
+}
+
+.collectionAd:has(.CAanzeige) {
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: auto min-content;
+  grid-template-rows: auto auto repeat(3, 1fr) auto;
+  gap: 1.25rem;
+  grid-template-areas:
+    "CAanzeige CAanzeige"
+    "CAteaser CAteaser"
+    "CAPR1 CAPR1"
+    "CAPR2 CAPR2"
+    "CAPR3 CAPR3"
+    "CActa CAlogo";
+  background-color: var(--BGhighlightColor);
+}
+.collectionAd .CAanzeige,
+.collectionAd .CActa {
+  color: var(--accentColor);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.collectionAd .CActa {
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 0.125em;
+}
+.collectionAd .CActa .material-symbols-rounded {
+  font-size: 0.875em;
+}
+.collectionAd .CAteaser {
+  position: relative;
+}
+.collectionAd .CAteaser::after {
+  content: "";
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+.collectionAd .CAteaser img {
+  height: 100%;
+}
+.collectionAd .CAteaser h2 {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.collectionAd .CAPR {
+  min-height: auto;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.collectionAd .CAPR img {
+  width: 50%;
+}
+.collectionAd .CAPR h2 {
+  width: 50%;
+  font-size: 1rem;
+  line-height: 1.15;
+  -webkit-line-clamp: 4;
+}
+.collectionAd .CAlogo {
+  max-height: 60px;
+  margin-left: auto;
+}
+
+/* BREAKPOINTS */
+@container pageCont (max-width: 767px) {
+  .mediumRectangle {
+    align-self: center;
+  }
+
+  .sectionHighlight:first-of-type article:first-child {
+    overflow: visible;
+  }
+  .sectionHighlight:first-of-type article:first-child img {
+    width: 100cqw;
+    position: relative;
+    top: -2.5rem;
+    left: -1.25rem;
+    margin-bottom: -2.5rem;
+  }
+  .sectionHighlight:first-of-type article:first-child p {
+    font-weight: 700;
+  }
+}
+
+@container pageCont (min-width: 768px) {
+  .understitial:has(iframe) {
+    display: none;
+  }
+
+  .shortLogo {
+    display: none;
+  }
+  .longLogo {
+    display: block;
+  }
+
+  section {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    justify-content: space-evenly;
+  }
+
+  .sectionHighlight {
+    grid-template-rows: auto 250px;
+  }
+
+  .sectionHighlight article {
+    padding: 1rem;
+    justify-content: flex-end;
+    position: relative;
+  }
+  .sectionHighlight article * {
+    color: #fff;
+  }
+  .sectionHighlight article img {
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: brightness(0.5);
+  }
+  .sectionHighlight article:first-child {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+}
+
+@container pageCont (min-width: 1020px) {
+  .banner {
+    margin-top: 2rem;
+    display: block;
+  }
+  .BG {
+    width: 100%;
+    height: 100cqh;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -10;
+  }
+
+  .collectionAd:has(.CAanzeige) {
+    padding: 1.5rem;
+    grid-template-columns: repeat(3, 300px);
+    grid-template-rows: auto repeat(3, 1fr) auto;
+    gap: calc(calc(var(--contentWidth) - 900px) / 4);
+    grid-template-areas:
+      "CAanzeige . CActa"
+      "CAteaser CAteaser CAPR1"
+      "CAteaser CAteaser CAPR2"
+      "CAteaser CAteaser CAPR3"
+      "CAteaser CAteaser CAlogo";
+  }
+  .collectionAd .CAanzeige,
+  .collectionAd .CActa {
+    font-size: 1.5rem;
+  }
+  .collectionAd .CActa {
+    justify-self: end;
+  }
+  .collectionAd .CAteaser h2 {
+    font-size: 1.5rem;
+  }
+  .collectionAd .CAPR h2 {
+    font-size: 1.125rem;
+  }
+
+  header {
+    grid-template-columns: repeat(5, auto);
+    grid-template-areas: "aboBtn links1 logo links2 menu";
+  }
+  .links {
+    display: flex;
+  }
+
+  section {
+    grid-template-columns: 300px 300px 300px;
+    justify-content: space-between;
+    gap: calc(calc(var(--contentWidth) - 900px) / 4);
+  }
+  section:first-of-type {
+    margin-top: 2rem;
+  }
+  .sectionHighlight {
+    height: auto;
+    grid-template-rows: 250px 250px;
+  }
+  .sectionStandard {
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .sectionHighlight article:first-child {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+  }
+}
+
+@container pageCont (min-width: 1320px) {
+  .aside {
+    display: block;
+    align-self: flex-start;
+    position: sticky;
+    top: 0;
+  }
+}
+
+@container pageCont (min-width: 1480px) {
+  main {
+    width: calc(var(--contentWidth) + 9rem);
+  }
+
+  header {
+    padding: 0 4.5rem;
+  }
+}
