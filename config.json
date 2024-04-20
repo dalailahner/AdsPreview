@@ -1,0 +1,111 @@
+{
+  "formate": [
+    {
+      "shortcode": "ADV",
+      "description": "Advertorial",
+      "target": ".sitelink",
+      "entryPoint": "ADV/index.html"
+    },
+    {
+      "shortcode": "BB",
+      "description": "BillBoard",
+      "width": 970,
+      "height": 250,
+      "target": ".banner",
+      "entryPoint": "BB/index.html"
+    },
+    {
+      "shortcode": "CA",
+      "description": "Collection Ad",
+      "target": ".collectionAd",
+      "entryPoint": "CA_SN/index.html"
+    },
+    {
+      "shortcode": "FSA",
+      "description": "FullSiteAd",
+      "werbemittel": [
+        {
+          "shortcode": "BB",
+          "width": 970,
+          "height": 250,
+          "target": ".banner",
+          "entryPoint": "FSA/BB/index.html"
+        },
+        {
+          "shortcode": "HPA",
+          "width": 300,
+          "height": 600,
+          "target": ".aside",
+          "entryPoint": "FSA/HPA/index.html"
+        },
+        {
+          "shortcode": "BG",
+          "target": ".BG",
+          "entryPoint": "FSA/BG/index.html"
+        }
+      ]
+    },
+    {
+      "shortcode": "HPA",
+      "description": "HalfPageAd",
+      "width": 300,
+      "height": 600,
+      "target": ".aside",
+      "entryPoint": "HPA/index.html"
+    },
+    {
+      "shortcode": "MR",
+      "description": "Medium Rectangle",
+      "width": 300,
+      "height": 250,
+      "target": ".mediumRectangle",
+      "entryPoint": "MR/index.html"
+    },
+    {
+      "shortcode": "MS",
+      "description": "MidScroll",
+      "target": ".midscroll",
+      "entryPoint": "MS/index.html"
+    },
+    {
+      "shortcode": "SB",
+      "description": "SiteBar",
+      "target": ".aside",
+      "entryPoint": "SB/index.html"
+    },
+    {
+      "shortcode": "SBXL",
+      "description": "SuperBannerXL",
+      "width": 970,
+      "height": 100,
+      "target": ".banner",
+      "entryPoint": "SBXL/index.html"
+    },
+    {
+      "shortcode": "SL",
+      "description": "SiteLink",
+      "target": ".sitelink",
+      "entryPoint": "SL/index.html"
+    },
+    {
+      "shortcode": "SS",
+      "description": "SkyScraper",
+      "width": 160,
+      "height": 600,
+      "target": ".aside",
+      "entryPoint": "SS/index.html"
+    },
+    {
+      "shortcode": "TS",
+      "description": "TopScroll",
+      "target": ".topscroll",
+      "entryPoint": "TS/index.html"
+    },
+    {
+      "shortcode": "US",
+      "description": "Understitial",
+      "target": ".understitial",
+      "entryPoint": "US/index.html"
+    }
+  ]
+}

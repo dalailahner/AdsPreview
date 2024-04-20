@@ -1,0 +1,142 @@
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 500;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff");
+}
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 700;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
+}
+
+:root {
+  font-size: 1.52236vh;
+  cursor: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  pointer-events: none;
+  user-select: none;
+}
+
+.phoneCont {
+  width: 100%;
+  height: 85vh;
+  position: relative;
+  pointer-events: none;
+}
+
+.phoneCont .content {
+  margin: 0 auto;
+  height: calc(100% - 3.5vh);
+  aspect-ratio: 213 / 466;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  top: 1.75vh;
+  border-radius: 4vh;
+  overflow: hidden;
+}
+
+.content .topBar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.topBar .status {
+  margin: 2vh 0 0.25vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.status p {
+  text-align: center;
+  font-family: "San Francisco", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.status svg {
+  margin: 0 auto;
+  height: 100%;
+  max-width: 7vh;
+  object-fit: contain;
+}
+
+.urlBar {
+  margin: 0.75vh 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+.urlBar p {
+  font-family: "San Francisco", sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.urlBar svg {
+  height: 1.25vh;
+}
+
+#pageCont {
+  background-color: #ffffff;
+  z-index: 1;
+}
+
+.phoneOverlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  z-index: 3;
+}
+
+#touchCursor {
+  width: 32px;
+  height: 32px;
+  display: block;
+  position: fixed;
+  left: -16px;
+  top: -16px;
+  border: 1px solid #999;
+  border-radius: 1000px;
+  background-color: #fff;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.333s ease;
+  overflow: hidden;
+  pointerevents: none;
+  userselect: none;
+  z-index: 1000;
+}
