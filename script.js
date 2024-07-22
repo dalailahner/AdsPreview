@@ -21,11 +21,82 @@ setupSite();
 //___________
 // EVENTS
 window.addEventListener("inject", (event) => {
+  injectAds.inject(queryArr, config);
+});
+
+window.addEventListener("resize", (event) => {
+  viewport.set("newWidth", window.innerWidth);
+  if (queryArr.includes("DESKTOP")) {
+    if (viewport.get("oldWidth") >= 1024 && viewport.get("newWidth") <= 1024) {
+      window.location.reload();
+    }
+    if (viewport.get("oldWidth") <= 1024 && viewport.get("newWidth") >= 1024) {
+      window.location.reload();
+    }
+  }
+  if (queryArr.includes("MOBILE")) {
+    if (viewport.get("oldWidth") <= 768 && viewport.get("newWidth") >= 768) {
+      window.location.reload();
+    }
+    if (viewport.get("oldWidth") >= 768 && viewport.get("newWidth") <= 768) {
+      window.location.reload();
+    }
+  }
+  viewport.set("oldWidth", viewport.get("newWidth"));
+});
+
+// CONSOLE MSG
+rainbowLine(31);
+consoleTable(config.formate);
+rainbowLine(31);
+/* prettier-ignore */
+console.log("%cExample for an Understitial ad on salzburg24.at mobile: " + window.location.origin + window.location.pathname + "?S24-MOBILE-US", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
+/* prettier-ignore */
+console.log("%cExample for multiple ads on sn.at desktop: " + window.location.origin + window.location.pathname + "?SN-DESKTOP-BB-HPA-MR", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
+rainbowLine(31);
+
+//___________
+// FUNCTIONS
+async function _fetch(url, type) {
+  console.log(`fetching ${url} ...`);
+  const response = await fetch(url);
+  promises.push(response);
+  if (type === "json") {
+    return response.json();
+  }
+  if (type === "html") {
+    const html = await response.text();
+    return parser.parseFromString(html, "text/html");
+  }
+}
+
+async function setupSite() {
+  console.log("setupSite started...");
+  const isMobileMockup = queryArr.includes("MOBILE") && window.innerWidth >= 768;
+  const wrapperDoc = await _fetch(getWrapperURL(), "html");
+
+  if (isMobileMockup) {
+    const pageContDoc = await _fetch(`./assets/sites/${queryArr.includes("S24") ? "S24.html" : "SN.html"}`, "html");
+    for (const el of pageContDoc.head.children) {
+      if (el.tagName === "LINK" || el.tagName === "STYLE") {
+        wrapperDoc.head.insertAdjacentHTML("beforeend", el.outerHTML);
+      }
+    }
+    wrapperDoc.querySelector("#pageCont").outerHTML = pageContDoc.body.innerHTML;
+  }
+
+  for (const el of wrapperDoc.head.children) {
+    if (el.tagName === "LINK" || el.tagName === "STYLE") {
+      document.head.insertAdjacentHTML("beforeend", el.outerHTML);
+    }
+  }
+
+  console.log("inserting target doc in main doc...");
+  document.body.innerHTML = wrapperDoc.body.innerHTML;
+
   lorem.init();
-  Promise.allSettled(promises).then(() => {
-    injectAds.inject(queryArr, config);
-  });
-  if (queryArr.includes("MOBILE") && window.innerWidth >= 768) {
+
+  if (isMobileMockup) {
     const pageContEl = document.querySelector("#pageCont");
     const topBarEl = document.querySelector(".topBar");
     const pageEl = document.querySelector("#page");
@@ -86,72 +157,15 @@ window.addEventListener("inject", (event) => {
       }
     });
   }
-});
 
-window.addEventListener("resize", (event) => {
-  viewport.set("newWidth", window.innerWidth);
-  if (queryArr.includes("DESKTOP")) {
-    if (viewport.get("oldWidth") >= 1024 && viewport.get("newWidth") <= 1024) {
-      window.location.reload();
-    }
-    if (viewport.get("oldWidth") <= 1024 && viewport.get("newWidth") >= 1024) {
-      window.location.reload();
-    }
-  }
-  if (queryArr.includes("MOBILE")) {
-    if (viewport.get("oldWidth") <= 768 && viewport.get("newWidth") >= 768) {
-      window.location.reload();
-    }
-    if (viewport.get("oldWidth") >= 768 && viewport.get("newWidth") <= 768) {
-      window.location.reload();
-    }
-  }
-  viewport.set("oldWidth", viewport.get("newWidth"));
-});
-
-// CONSOLE MSG
-rainbowLine(31);
-consoleTable(config.formate);
-rainbowLine(31);
-/* prettier-ignore */
-console.log("%cExample for an Understitial ad on salzburg24.at mobile: " + window.location.origin + window.location.pathname + "?S24-MOBILE-US", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
-/* prettier-ignore */
-console.log("%cExample for multiple ads on sn.at desktop: " + window.location.origin + window.location.pathname + "?SN-DESKTOP-BB-HPA-MR", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
-rainbowLine(31);
-
-//___________
-// FUNCTIONS
-async function _fetch(url, type) {
-  const response = await fetch(url);
-  promises.push(response);
-  if (type === "json") {
-    return response.json();
-  }
-  if (type === "html") {
-    const html = await response.text();
-    return parser.parseFromString(html, "text/html");
-  }
-}
-
-async function setupSite() {
-  const wrapperDoc = await _fetch(getWrapperURL(), "html");
-  if (queryArr.includes("MOBILE") && window.innerWidth >= 768) {
-    const pageContDoc = await _fetch(`./assets/sites/${queryArr.includes("S24") ? "S24.html" : "SN.html"}`, "html");
-    for (const el of pageContDoc.head.children) {
-      if (el.tagName === "LINK" || el.tagName === "STYLE") {
-        wrapperDoc.head.insertAdjacentHTML("beforeend", el.outerHTML);
-      }
-    }
-    wrapperDoc.querySelector("#pageCont").outerHTML = pageContDoc.body.innerHTML;
-  }
-  for (const el of wrapperDoc.head.children) {
-    if (el.tagName === "LINK" || el.tagName === "STYLE") {
-      document.head.insertAdjacentHTML("beforeend", el.outerHTML);
-    }
-  }
-  document.body.innerHTML = wrapperDoc.body.innerHTML;
-
-  window.dispatchEvent(inject);
+  Promise.allSettled(promises)
+    .then(() => {
+      console.log("injecting Ads...");
+      window.dispatchEvent(inject);
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
 }
 
 function getWrapperURL() {

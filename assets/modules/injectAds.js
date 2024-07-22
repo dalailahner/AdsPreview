@@ -57,6 +57,7 @@ const injectAds = {
         return;
 
       case "BG":
+      case "TS":
         resizeObserver.observe(targetEl, { box: "border-box" });
         break;
 
@@ -65,9 +66,32 @@ const injectAds = {
         break;
 
       case "MS":
-      case "TS":
-        targetEl.style.display = "block";
         resizeObserver.observe(targetEl, { box: "border-box" });
+        (function setupMidscrollObserver() {
+          const rootStyle = getComputedStyle(document.documentElement);
+
+          if (rootStyle.fontSize && rootStyle.getPropertyValue("--headerHeight")) {
+            const intersectionObserverTopMargin = `${(parseFloat(rootStyle.fontSize) * parseFloat(rootStyle.getPropertyValue("--headerHeight")) + 5) * -1}px`;
+
+            const MSobserver = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    targetEl.querySelector("iframe").style.visibility = "visible";
+                  } else {
+                    targetEl.querySelector("iframe").style.visibility = "hidden";
+                  }
+                });
+              },
+              { root: document.querySelector("#page"), rootMargin: `${intersectionObserverTopMargin} 0px -5px 0px` }
+            );
+            MSobserver.observe(targetEl);
+          } else {
+            setTimeout(() => {
+              setupMidscrollObserver();
+            }, 1);
+          }
+        })();
         break;
 
       case "SB":
@@ -101,7 +125,12 @@ const injectAds = {
         break;
     }
 
-    targetEl.innerHTML = `<iframe src="./assets/WM/${obj.entryPoint}" width="${obj.width}" height="${obj.height}" frameborder="0"></iframe>`;
+    const ADiframe = document.createElement("iframe");
+    ADiframe.width = obj.width;
+    ADiframe.height = obj.height;
+    ADiframe.src = `./assets/WM/${obj.entryPoint}`;
+
+    targetEl.replaceChildren(ADiframe);
   },
 };
 
