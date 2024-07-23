@@ -60,11 +60,12 @@ main {
 
 /* HEADER */
 header {
+  margin-top: 1px;
+  padding: 0 1.5rem;
   width: 100%;
   height: var(--headerHeight);
-  padding: 0 1.5rem;
   position: sticky;
-  top: 0;
+  top: -1px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   grid-template-areas: "aboBtn logo menu";
@@ -72,7 +73,12 @@ header {
   justify-content: space-between;
   background-color: #fff;
   box-shadow: 0 2rem 1rem -1rem rgba(204, 221, 238, 0.15);
+  transform: translateY(0);
+  transition: transform 0.15s ease-out;
   z-index: 100;
+  &.hide {
+    transform: translateY(calc(var(--headerHeight) * -1));
+  }
 }
 
 .btn {

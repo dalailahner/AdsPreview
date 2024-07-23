@@ -24,6 +24,19 @@ window.addEventListener("inject", (event) => {
   injectAds.inject(queryArr, config);
 });
 
+window.addEventListener("handleHeader", (event) => {
+  const headerEl = document.querySelector("header");
+  if (headerEl.classList.contains("isSticky")) {
+    if (event.detail.direction > 0) {
+      headerEl.classList.add("hide");
+      return;
+    }
+    if (event.detail.direction < 0) {
+      headerEl.classList.remove("hide");
+    }
+  }
+});
+
 window.addEventListener("resize", (event) => {
   viewport.set("newWidth", window.innerWidth);
   if (queryArr.includes("DESKTOP")) {
@@ -126,6 +139,13 @@ async function setupSite() {
       touch.get("cursor").style.opacity = "0.6";
       if (touch.get("down")) {
         let PosDelta = touch.get("prevPoint") - event.clientY;
+        window.dispatchEvent(
+          new CustomEvent("handleHeader", {
+            detail: {
+              direction: PosDelta,
+            },
+          })
+        );
         scrollPos += PosDelta << 1;
         if (scrollPos < 0) {
           scrollPos = 0;
@@ -155,8 +175,39 @@ async function setupSite() {
       } else if (scrollPos > touch.get("maxScroll")) {
         scrollPos = touch.get("maxScroll");
       }
+      window.dispatchEvent(
+        new CustomEvent("handleHeader", {
+          detail: {
+            direction: event.deltaY,
+          },
+        })
+      );
+    });
+  } else {
+    let oldscrollPos = 0;
+    document.querySelector("#page").addEventListener("scroll", (event) => {
+      const scrollDirection = event.target.scrollTop - oldscrollPos;
+      console.log(scrollDirection);
+      window.dispatchEvent(
+        new CustomEvent("handleHeader", {
+          detail: {
+            direction: scrollDirection,
+          },
+        })
+      );
+      oldscrollPos = event.target.scrollTop;
     });
   }
+
+  const headerStickyObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("isSticky", entry.intersectionRatio < 1);
+      });
+    },
+    { root: document.querySelector("#page"), threshold: [1] }
+  );
+  headerStickyObserver.observe(document.querySelector("header"));
 
   Promise.allSettled(promises)
     .then(() => {
