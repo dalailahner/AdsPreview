@@ -52,7 +52,7 @@ window.addEventListener("resize", (event) => {
       window.location.reload();
     }
   }
-  if (queryArr.includes("MOBILE")) {
+  if (queryArr.includes("MOBIL")) {
     if (viewport.get("oldWidth") <= 768 && viewport.get("newWidth") >= 768) {
       window.location.reload();
     }
@@ -68,9 +68,9 @@ rainbowLine(31);
 consoleTable(config.formate);
 rainbowLine(31);
 /* prettier-ignore */
-console.log(`%cExample for an Understitial ad on salzburg24.at mobile: ${window.location.origin}${window.location.pathname}?S24-MOBILE-US`, "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
+console.log("%cBeispiel für ein Understitial auf salzburg24.at mobil: " + window.location.origin + window.location.pathname + "?S24-MOBIL-US", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
 /* prettier-ignore */
-console.log(`%cExample for multiple ads on sn.at desktop: ${window.location.origin}${window.location.pathname}?SN-DESKTOP-BB-HPA-MR`, "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
+console.log("%cBeispiel für mehrere Ads auf sn.at desktop: " + window.location.origin + window.location.pathname + "?SN-DESKTOP-BB-HPA-MR", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
 rainbowLine(31);
 
 //___________
@@ -90,7 +90,7 @@ async function _fetch(url, type) {
 
 async function setupSite() {
   console.log("setupSite started...");
-  const isMobileMockup = queryArr.includes("MOBILE") && window.innerWidth >= 768;
+  const isMobileMockup = queryArr.includes("MOBIL") && window.innerWidth >= 768;
   const wrapperDoc = await _fetch(getWrapperURL(), "html");
 
   if (isMobileMockup) {
@@ -206,7 +206,7 @@ function getWrapperURL() {
   if (queryArr.includes("DESKTOP") && window.innerWidth < 1024) {
     return `${wrapperURL}tooSmall.html${queryString}`;
   }
-  if (queryArr.includes("MOBILE") && window.innerWidth >= 768) {
+  if (queryArr.includes("MOBIL") && window.innerWidth >= 768) {
     return `${wrapperURL}mobile.html${queryString}`;
   }
   return `${wrapperURL}${queryArr.includes("S24") ? "S24.html" : "SN.html"}${queryString}`;
