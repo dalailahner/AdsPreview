@@ -4,7 +4,7 @@ const injectAds = {
   inject(queryArr, config) {
     const insertions = [];
     queryArr.forEach((query) => {
-      if (["DESKTOP", "MOBILE", "SN", "S24"].includes(query)) {
+      if (["DESKTOP", "MOBIL", "SN", "S24"].includes(query)) {
         return;
       }
       config.formate.forEach((item) => {
@@ -137,10 +137,10 @@ const injectAds = {
         break;
 
       case "US":
-        if (queryArr.includes("MOBILE") && queryArr.includes("MR")) {
+        if (queryArr.includes("MOBIL") && queryArr.includes("MR")) {
           return;
         }
-        if (queryArr.includes("S24") && queryArr.includes("MOBILE") && queryArr.includes("SL")) {
+        if (queryArr.includes("S24") && queryArr.includes("MOBIL") && queryArr.includes("SL")) {
           return;
         }
         resizeObserver.observe(targetEl, { box: "border-box" });
