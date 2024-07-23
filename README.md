@@ -1,27 +1,26 @@
-# AdsPreview for sn.at and salzburg24.at
+# AdsPreview für sn.at und salzburg24.at
 
-shows a preview of selected display ads on a mock site.
+Browseransicht der ausgewählten Display-Werbemittel auf einer Mock-Seite.
 
 ### Preview:
 
-![URL / Browser preview](https://github.com/dalailahner/AdsPreview/blob/7dc8757ca9775a277b4cdd96118dce28e43bbb1e/preview.gif)
+![URL / Browser preview](https://github.com/dalailahner/AdsPreview/blob/b564ef518e490330567854c1fba2ac3638297fdf/preview.gif)
 
-## how to use:
+## Tutorial:
 
-1. serve the root directory and open index.html in a browser
-2. look at the available options for the ads in the console.
-3. add the preferred options as a hyphen-separated search query string to the end of the URL in the browser.
+1. Stammverzeichnis im Netzwerk bereitstellen und index.html im Browser öffnen.
+2. entnehmen Sie der Browserkonsole die verfügbaren Optionen für die Werbeanzeigen.
+3. fügen Sie die ausgewählten Optionen als Bindestrich-getrennten search query der URL im Browser hinzu.
 
-## Available options:
+## Verfügbare Optionen:
 
-|           | strings                                                                                      | default                                           |
-| --------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| **Page:** | `SN` or `S24`                                                                                | `SN` (not showing in search query string)         |
-| **Size:** | `DESKTOP` or `MOBILE`                                                                        | none (just displays it in the available viewport) |
-| **Ads:**  | any single or combination of<br>the available ad-shortcodes<br>found in the browser console. | none                                              |
-|           |                                                                                              |                                                   |
+|            | strings                                                                              | default                                                  |
+| ---------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| **Seite:** | `SN` oder `S24`                                                                      | `SN` (wird nicht im search query angezeigt)              |
+| **Größe:** | `DESKTOP` oder `MOBIL`                                                               | keine (wird einfach im verfügbaren Viewport dargestellt) |
+| **Ads:**   | einen oder eine Kombination aus den in der Browserkonsole verfügbaren Ad-Shortcodes. | keine                                                    |
 
 ## Disclaimer:
 
-- I had no access to any kind of server so I had to do everything client-side.
-- not every ad is shown in every viewport size, I had to follow the sites existing layout.
+- Ich hatte keinen Zugang zu einem Server und musste daher alles client-side lösen.
+- nicht jede Anzeige wird in jedem Viewport dargestellt. Musste mich an das bestehende Layout der Website halten.
