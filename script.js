@@ -8,7 +8,6 @@ const promises = [];
 const config = await _fetch("./config.json", "json");
 const queryString = window.location.search.toUpperCase();
 const queryArr = queryString.replace(/[^\w\d-]/g, "").split("-");
-const inject = new Event("inject");
 const lerpAmount = 0.125;
 let scrollPos = 0;
 
@@ -16,14 +15,20 @@ if (window.location.search !== queryString) {
   window.location.search = queryString;
 }
 
-setupSite();
+setupSite().then(() => {
+  console.log("inserting ads...");
+  injectAds.inject(queryArr, config).then(() => {
+    setTimeout(() => {
+      // desktop:
+      document.querySelector("#page").scrollTo({ top: injectAds.getTopmostAdPos(), left: 0, behavior: "smooth" });
+      // mobile :
+      scrollPos = injectAds.getTopmostAdPos();
+    }, 750);
+  });
+});
 
 //___________
 // EVENTS
-window.addEventListener("inject", (event) => {
-  injectAds.inject(queryArr, config);
-});
-
 window.addEventListener("handleHeader", (event) => {
   const headerEl = document.querySelector("header");
   if (headerEl.classList.contains("isSticky")) {
@@ -110,28 +115,25 @@ async function setupSite() {
   lorem.init();
 
   if (isMobileMockup) {
-    const pageContEl = document.querySelector("#pageCont");
-    const topBarEl = document.querySelector(".topBar");
     const pageEl = document.querySelector("#page");
     const uhrzeitEl = document.querySelector("#uhrzeit");
-    const urlBarTextEl = document.querySelector("#urlBarText");
     const touch = new Map().set("cursor", document.querySelector("#touchCursor"));
     const mobileResizeObserver = new ResizeObserver(() => {
-      touch.set("topBarHeight", topBarEl.clientHeight);
-      pageContEl.style.height = `calc(100% - ${touch.get("topBarHeight")}px)`;
+      touch.set("topBarHeight", document.querySelector(".topBar").clientHeight);
+      document.querySelector("#pageCont").style.height = `calc(100% - ${touch.get("topBarHeight")}px)`;
       touch.set("maxScroll", pageEl.scrollHeight - pageEl.clientHeight + touch.get("topBarHeight"));
     });
     mobileResizeObserver.observe(pageEl, { box: "border-box" });
 
     setUhrzeit(uhrzeitEl);
-    urlBarTextEl.innerText = queryArr.includes("S24") ? "salzburg24.at" : "sn.at";
+    document.querySelector("#urlBarText").innerText = queryArr.includes("S24") ? "salzburg24.at" : "sn.at";
     setInterval(() => {
       setUhrzeit(uhrzeitEl);
     }, 3e4);
 
     mobileResizeObserver.observe(document.querySelector(".topBar"), { box: "border-box" });
 
-    scroll(pageEl);
+    mobileScroll(pageEl);
 
     window.addEventListener("pointermove", (event) => {
       event.preventDefault();
@@ -139,13 +141,6 @@ async function setupSite() {
       touch.get("cursor").style.opacity = "0.6";
       if (touch.get("down")) {
         let PosDelta = touch.get("prevPoint") - event.clientY;
-        window.dispatchEvent(
-          new CustomEvent("handleHeader", {
-            detail: {
-              direction: PosDelta,
-            },
-          })
-        );
         scrollPos += PosDelta << 1;
         if (scrollPos < 0) {
           scrollPos = 0;
@@ -172,22 +167,15 @@ async function setupSite() {
       scrollPos += event.deltaY;
       if (scrollPos < 0) {
         scrollPos = 0;
-      } else if (scrollPos > touch.get("maxScroll")) {
+      }
+      if (scrollPos > touch.get("maxScroll")) {
         scrollPos = touch.get("maxScroll");
       }
-      window.dispatchEvent(
-        new CustomEvent("handleHeader", {
-          detail: {
-            direction: event.deltaY,
-          },
-        })
-      );
     });
   } else {
-    let oldscrollPos = 0;
+    let oldScrollPos = 0;
     document.querySelector("#page").addEventListener("scroll", (event) => {
-      const scrollDirection = event.target.scrollTop - oldscrollPos;
-      console.log(scrollDirection);
+      const scrollDirection = event.target.scrollTop - oldScrollPos;
       window.dispatchEvent(
         new CustomEvent("handleHeader", {
           detail: {
@@ -195,7 +183,7 @@ async function setupSite() {
           },
         })
       );
-      oldscrollPos = event.target.scrollTop;
+      oldScrollPos = event.target.scrollTop;
     });
   }
 
@@ -209,14 +197,7 @@ async function setupSite() {
   );
   headerStickyObserver.observe(document.querySelector("header"));
 
-  Promise.allSettled(promises)
-    .then(() => {
-      console.log("injecting Ads...");
-      window.dispatchEvent(inject);
-    })
-    .catch((err) => {
-      throw new Error(err);
-    });
+  return Promise.allSettled(promises);
 }
 
 function getWrapperURL() {
@@ -236,11 +217,22 @@ function setUhrzeit(el) {
   el.innerText = timestamp.getHours().toString() + ":" + timestamp.getMinutes().toString().padStart(2, "0");
 }
 
-function scroll(el) {
+function mobileScroll(el) {
   const currentScrollPos = el.scrollTop;
-  el.scrollTop = (1 - lerpAmount) * currentScrollPos + lerpAmount * scrollPos;
+  const newScrollPos = (1 - lerpAmount) * currentScrollPos + lerpAmount * scrollPos;
+
+  el.scrollTop = newScrollPos;
+
+  window.dispatchEvent(
+    new CustomEvent("handleHeader", {
+      detail: {
+        direction: newScrollPos - currentScrollPos,
+      },
+    })
+  );
+
   window.requestAnimationFrame(() => {
-    scroll(el);
+    mobileScroll(el);
   });
 }
 

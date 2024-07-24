@@ -1,5 +1,8 @@
 const injectAds = {
+  targetElArr: [],
+
   inject(queryArr, config) {
+    const insertions = [];
     queryArr.forEach((query) => {
       if (["DESKTOP", "MOBILE", "SN", "S24"].includes(query)) {
         return;
@@ -12,10 +15,33 @@ const injectAds = {
           console.error(`the target element "${item.target}" of shortcode "${item.shortcode}" is not found in the DOM`);
           return;
         }
-        injectAds.insertIframe(item, queryArr);
+        insertions.push(injectAds.insertIframe(item, queryArr));
       });
     });
+    return Promise.allSettled(insertions);
   },
+
+  getTopmostAdPos() {
+    let topmostAdPos = null;
+    if (injectAds.targetElArr.length > 0) {
+      injectAds.targetElArr.forEach((el) => {
+        const elRect = el.getBoundingClientRect();
+        const elPos = parseInt(elRect.top) + (elRect.height >> 1) - (window.innerHeight >> 1);
+        // always set first one
+        if (topmostAdPos === null) {
+          topmostAdPos = elPos;
+        }
+        // set if it's higher up the page
+        if (elPos < topmostAdPos) {
+          topmostAdPos = elPos;
+        }
+      });
+      return topmostAdPos;
+    } else {
+      return 0;
+    }
+  },
+
   async insertIframe(obj, queryArr) {
     const resizeObserver = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
@@ -33,6 +59,7 @@ const injectAds = {
     }
 
     const targetEl = document.querySelector(obj.target);
+    injectAds.targetElArr.push(targetEl);
 
     switch (obj.shortcode) {
       case "ADV":
