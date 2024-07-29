@@ -144,6 +144,23 @@ const injectAds = {
           return;
         }
         resizeObserver.observe(targetEl, { box: "border-box" });
+
+        (function setupUnderstitialObserver() {
+          const USobserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  targetEl.querySelector("iframe").style.visibility = "visible";
+                } else {
+                  targetEl.querySelector("iframe").style.visibility = "hidden";
+                }
+              });
+            },
+            { root: document.querySelector("#page"), rootMargin: `5px 0px -5px 0px` }
+          );
+          USobserver.observe(targetEl);
+        })();
+
         break;
 
       default:
