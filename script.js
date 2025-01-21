@@ -68,9 +68,9 @@ rainbowLine(31);
 consoleTable(config.formate);
 rainbowLine(31);
 /* prettier-ignore */
-console.log("%cExample for an Understitial ad on salzburg24.at mobile: " + window.location.origin + window.location.pathname + "?S24-MOBILE-US", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
+console.log(`%cExample for an Understitial ad on salzburg24.at mobile: ${window.location.origin}${window.location.pathname}?S24-MOBILE-US`, "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
 /* prettier-ignore */
-console.log("%cExample for multiple ads on sn.at desktop: " + window.location.origin + window.location.pathname + "?SN-DESKTOP-BB-HPA-MR", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
+console.log(`%cExample for multiple ads on sn.at desktop: ${window.location.origin}${window.location.pathname}?SN-DESKTOP-BB-HPA-MR`, "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
 rainbowLine(31);
 
 //___________
@@ -140,7 +140,7 @@ async function setupSite() {
       touch.get("cursor").style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
       touch.get("cursor").style.opacity = "0.6";
       if (touch.get("down")) {
-        let PosDelta = touch.get("prevPoint") - event.clientY;
+        const PosDelta = touch.get("prevPoint") - event.clientY;
         scrollPos += PosDelta << 1;
         if (scrollPos < 0) {
           scrollPos = 0;
@@ -181,7 +181,7 @@ async function setupSite() {
           detail: {
             direction: scrollDirection,
           },
-        })
+        }),
       );
       oldScrollPos = event.target.scrollTop;
     });
@@ -189,11 +189,11 @@ async function setupSite() {
 
   const headerStickyObserver = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
+      for (const entry of entries) {
         entry.target.classList.toggle("isSticky", entry.intersectionRatio < 1);
-      });
+      }
     },
-    { root: document.querySelector("#page"), threshold: [1] }
+    { root: document.querySelector("#page"), threshold: [1] },
   );
   headerStickyObserver.observe(document.querySelector("header"));
 
@@ -201,7 +201,7 @@ async function setupSite() {
 }
 
 function getWrapperURL() {
-  let wrapperURL = "./assets/sites/";
+  const wrapperURL = "./assets/sites/";
 
   if (queryArr.includes("DESKTOP") && window.innerWidth < 1024) {
     return `${wrapperURL}tooSmall.html${queryString}`;
@@ -213,8 +213,8 @@ function getWrapperURL() {
 }
 
 function setUhrzeit(el) {
-  let timestamp = new Date();
-  el.innerText = timestamp.getHours().toString() + ":" + timestamp.getMinutes().toString().padStart(2, "0");
+  const timestamp = new Date();
+  el.innerText = `${timestamp.getHours().toString()}:${timestamp.getMinutes().toString().padStart(2, "0")}`;
 }
 
 function mobileScroll(el) {
@@ -228,7 +228,7 @@ function mobileScroll(el) {
       detail: {
         direction: newScrollPos - currentScrollPos,
       },
-    })
+    }),
   );
 
   window.requestAnimationFrame(() => {
@@ -238,13 +238,13 @@ function mobileScroll(el) {
 
 function rainbowLine(length = 36) {
   let text = "";
-  let styleArr = [];
-  let hue = 360 / length;
+  const styleArr = [];
+  const hue = 360 / length;
   for (let i = 0; i < length; i++) {
     text += "%c*";
   }
   for (let i = 0; i < length; i++) {
-    styleArr.push("color:hsl(" + hue * i + ",100%,50%);font-size:1.5rem");
+    styleArr.push(`color:hsl(${hue * i},100%,50%);font-size:1.5rem`);
   }
   console.log(text, ...styleArr);
 }
@@ -264,24 +264,24 @@ function consoleTable(arr) {
       targetLen = targetLen < arr[i].target.length ? arr[i].target.length : targetLen;
     }
   }
-  const horizontalLine = "-+" + "-".repeat(descrLen + 2) + "+" + "-".repeat(shortLen + 2) + "+" + "-".repeat(targetLen + 2) + "+-";
-  const tableHeaders = " | " + "AD".padEnd(descrLen, " ") + " | " + "SHORTCODE".padEnd(shortLen, " ") + " | " + "TARGET".padEnd(targetLen, " ") + " | ";
+  const horizontalLine = `-+${"-".repeat(descrLen + 2)}+${"-".repeat(shortLen + 2)}+${"-".repeat(targetLen + 2)}+-`;
+  const tableHeaders = ` | ${"AD".padEnd(descrLen, " ")} | ${"SHORTCODE".padEnd(shortLen, " ")} | ${"TARGET".padEnd(targetLen, " ")} | `;
   let tableBody = "";
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].description) {
-      tableBody += " | " + arr[i].description.padEnd(descrLen, " ");
+      tableBody += ` | ${arr[i].description.padEnd(descrLen, " ")}`;
     } else {
-      tableBody += " | " + " ".repeat(descrLen);
+      tableBody += ` | ${" ".repeat(descrLen)}`;
     }
     if (arr[i].shortcode) {
-      tableBody += " | " + arr[i].shortcode.padEnd(shortLen, " ");
+      tableBody += ` | ${arr[i].shortcode.padEnd(shortLen, " ")}`;
     } else {
-      tableBody += " | " + " ".repeat(shortLen);
+      tableBody += ` | ${" ".repeat(shortLen)}`;
     }
     if (arr[i].target) {
-      tableBody += " | " + arr[i].target.padEnd(targetLen, " ") + " | \n";
+      tableBody += ` | ${arr[i].target.padEnd(targetLen, " ")} | \n`;
     } else {
-      tableBody += " | " + " ".repeat(targetLen) + " | \n";
+      tableBody += ` | ${" ".repeat(targetLen)} | \n`;
     }
   }
   console.log(`%c${horizontalLine}\n${tableHeaders}\n${horizontalLine}\n${tableBody}${horizontalLine}`, "color:#FFDD33;background-color:#000933;font-size:0.875rem;margin:0;padding:0;");
