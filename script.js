@@ -68,9 +68,9 @@ rainbowLine(31);
 consoleTable(config.formate);
 rainbowLine(31);
 /* prettier-ignore */
-console.log("%cBeispiel für ein Understitial auf salzburg24.at mobil: " + window.location.origin + window.location.pathname + "?S24-MOBIL-US", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
+console.log(`%cBeispiel für ein Understitial auf salzburg24.at mobil: ${window.location.origin}${window.location.pathname}?S24-MOBIL-US`, "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
 /* prettier-ignore */
-console.log("%cBeispiel für mehrere Ads auf sn.at desktop: " + window.location.origin + window.location.pathname + "?SN-DESKTOP-BB-HPA-MR", "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
+console.log(`%cBeispiel für mehrere Ads auf sn.at desktop: ${window.location.origin}${window.location.pathname}?SN-DESKTOP-BB-HPA-MR`, "color:#ffffff;background-color:#000933;border:2px solid #FFDD33;padding:0.5rem;font-size:0.875rem");
 rainbowLine(31);
 
 //___________
