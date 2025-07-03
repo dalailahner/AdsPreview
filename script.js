@@ -1,11 +1,11 @@
 import lorem from "./assets/modules/lorem.js";
 import injectAds from "./assets/modules/injectAds.js";
+import config from "./config.json" with { type: "json" };
 
 // VARIABLES
 const parser = new DOMParser();
 const viewport = new Map().set("oldWidth", window.innerWidth);
 const promises = [];
-const config = await _fetch("./config.json", "json");
 const queryString = window.location.search.toUpperCase();
 const queryArr = queryString.replace(/[^\w\d-]/g, "").split("-");
 const lerpAmount = 0.125;
