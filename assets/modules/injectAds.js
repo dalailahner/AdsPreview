@@ -84,7 +84,12 @@ const injectAds = {
         return;
 
       case "BG":
+        resizeObserver.observe(targetEl, { box: "border-box" });
+        break;
+
+      case "MLL":
       case "TS":
+        targetEl.classList.add(obj.description);
         resizeObserver.observe(targetEl, { box: "border-box" });
         break;
 
@@ -110,7 +115,7 @@ const injectAds = {
                   }
                 });
               },
-              { root: document.querySelector("#page"), rootMargin: `${intersectionObserverTopMargin} 0px -5px 0px` }
+              { root: document.querySelector("#page"), rootMargin: `${intersectionObserverTopMargin} 0px -5px 0px` },
             );
             MSobserver.observe(targetEl);
           } else {
@@ -156,7 +161,7 @@ const injectAds = {
                 }
               });
             },
-            { root: document.querySelector("#page"), rootMargin: `5px 0px -5px 0px` }
+            { root: document.querySelector("#page"), rootMargin: `5px 0px -5px 0px` },
           );
           USobserver.observe(targetEl);
         })();
